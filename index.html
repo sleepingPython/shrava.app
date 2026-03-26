@@ -3,66 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shrava - Timeless Mantras</title>
+    <title>Shrava | Timeless Indian Wisdom</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            text-align: center; 
-            padding: 80px 20px; 
-            color: #2c3e50; 
-            line-height: 1.6;
-            background-color: #fcfcfc;
+        :root {
+            --bg-color: #4a5d4e; 
+            --text-color: #e2ded0;
+            --accent-pink: #c29591;
+            --gold-btn: #7a765a;
+            --input-bg: rgba(255, 255, 255, 0.08);
         }
-        .logo { 
-            width: 120px; 
-            height: auto; 
-            margin-bottom: 24px; 
-            border-radius: 24%; /* Gives a nice app-icon look */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex; flex-direction: column;
+            min-height: 100vh;
         }
-        h1 { 
-            font-size: 2.5rem; 
-            margin-bottom: 12px; 
-            font-weight: 700;
-            letter-spacing: -0.5px;
+
+        .main-wrapper {
+            flex: 1;
+            display: flex; justify-content: center; align-items: center;
+            padding: 40px 20px;
         }
-        p { 
-            font-size: 1.3rem; 
-            color: #5a67d8; /* A soft indigo for clarity */
-            max-width: 600px; 
-            margin: 0 auto 40px; 
-            font-weight: 400;
+
+        .container {
+            display: flex; flex-direction: row;
+            width: 100%; max-width: 1100px;
+            align-items: center; gap: 60px;
         }
-        .btn { 
-            background: #1a202c; 
-            color: #fff; 
-            padding: 16px 32px; 
-            text-decoration: none; 
-            border-radius: 30px; 
-            font-weight: 500; 
-            display: inline-block;
-            transition: transform 0.2s ease;
-        }
-        .btn:hover { transform: translateY(-2px); }
+
+        /* Left Side: Text & Form */
+        .content { flex: 1.2; text-align: left; }
+        h1 { font-size: 5.5rem; margin: 0; font-weight: 300; letter-spacing: -3px; }
+        .tagline { font-size: 1.8rem; margin: 10px 0 40px; opacity: 0.85; font-weight: 300; line-height: 1.2; }
         
-        footer { margin-top: 100px; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 20px; }
-        footer a { color: #718096; text-decoration: none; margin: 0 10px; }
-        footer a:hover { text-decoration: underline; }
+        .status-pill {
+            display: inline-block; border: 1.5px solid var(--text-color);
+            padding: 6px 22px; border-radius: 25px;
+            font-size: 0.75rem; text-transform: uppercase; margin-bottom: 30px;
+            letter-spacing: 1px; font-weight: 600;
+        }
+
+        .email-form { display: flex; flex-direction: column; gap: 15px; max-width: 420px; }
+        input[type="email"] {
+            background: var(--input-bg);
+            border: 1px solid rgba(226, 222, 208, 0.2);
+            padding: 18px; border-radius: 14px;
+            color: var(--text-color); font-size: 1rem; outline: none;
+        }
+        input[type="email"]::placeholder { color: rgba(226, 222, 208, 0.5); }
+        
+        .submit-btn {
+            background-color: var(--accent-pink);
+            color: white; border: none; padding: 18px;
+            border-radius: 14px; cursor: pointer; font-weight: 600; font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+        .submit-btn:hover { opacity: 0.9; }
+
+        /* Right Side: Phone Mockup */
+        .phone-mockup { flex: 0.8; display: flex; justify-content: center; }
+        .phone-screen {
+            width: 280px; height: 580px;
+            background-color: #3e4d41;
+            border: 10px solid #2a362c; border-radius: 45px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        .phone-screen h2 { font-size: 3.5rem; margin: 0; font-weight: 400; }
+        .phone-btn {
+            position: absolute; bottom: 50px;
+            background-color: var(--gold-btn);
+            color: var(--text-color); padding: 14px 45px;
+            border-radius: 30px; font-size: 0.85rem; font-weight: 600;
+        }
+
+        /* Footer */
+        footer { 
+            padding: 30px; text-align: center; font-size: 0.85rem; opacity: 0.7; 
+        }
+        footer a { color: var(--text-color); text-decoration: none; margin-left: 15px; border-bottom: 1px solid transparent; }
+        footer a:hover { border-bottom: 1px dashed var(--text-color); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            .container { flex-direction: column; text-align: center; gap: 50px; }
+            .content { display: flex; flex-direction: column; align-items: center; }
+            h1 { font-size: 4rem; }
+            .phone-mockup { margin-top: 20px; }
+        }
     </style>
 </head>
 <body>
 
-    <img src="NewLogo2.png" alt="Shrava Logo" class="logo">
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="content">
+                <div class="status-pill">Coming Soon</div>
+                <h1>Shrava</h1>
+                <p class="tagline">Timeless Indian wisdom for modern clarity</p>
+                
+                <form class="email-form" id="earlyAccessForm">
+                    <input type="email" id="emailInput" placeholder="Enter your email" required>
+                    <button type="submit" class="submit-btn">Register for Early Access</button>
+                </form>
+                <p id="msg" style="margin-top:15px; font-size: 0.95rem; font-weight: 500;"></p>
+            </div>
 
-    <h1>Shrava</h1>
-    <p>Timeless Mantras for modern clarity</p>
-
-    <a href="#" class="btn">Coming Soon</a>
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <h2>Shrava</h2>
+                    <div class="phone-btn">Enlighten me</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
-        <p>&copy; 2026 Shrava</p>
-        <a href="privacy-policy.html">Privacy Policy</a>
+        <span>&copy; 2026 Shrava</span>
+        <a href="privacy-policy.htm">Privacy Policy</a>
     </footer>
 
+    <script>
+        // REPLACE THESE WITH YOUR ACTUAL SUPABASE KEYS
+        const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+        const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+
+        // Initialize Supabase client
+        const { createClient } = supabase;
+        const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const form = document.getElementById('earlyAccessForm');
+        const msg = document.getElementById('msg');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+
+            // Inserts email into your 'waitlist' table
+            const { error } = await _supabase
+                .from('waitlist') 
+                .insert([{ email: email }]);
+
+            if (error) {
+                msg.innerText = "Something went wrong. Please try again.";
+                msg.style.color = "#ffb3b3";
+            } else {
+                msg.innerText = "You're on the list. Thank you! 🙏";
+                msg.style.color = "#d4edda";
+                form.reset();
+            }
+        });
+    </script>
 </body>
 </html>
