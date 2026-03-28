@@ -134,6 +134,10 @@
         // Supabase Logic
          const SUPABASE_URL = 'https://btqjbffhusmmiwfukkrp.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_C4Ns_NBJDaj5RD1Kw2hPdg_ww40vmqu';
+
+           // Initialize Supabase client
+        const { createClient } = supabase;
+        const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
        
         const form = document.getElementById('earlyAccessForm');
         const msg = document.getElementById('msg');
@@ -142,7 +146,7 @@
             e.preventDefault();
             const email = document.getElementById('emailInput').value;
 
-            const { error } = await_supabase
+            const { error } = await _supabase
                 .from('waitlist') 
                 .insert([{ email: email }]);
 
