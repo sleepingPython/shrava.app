@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shrava | Timeless Indian Wisdom</title>
+    <title>Shrava | Daily Practices for a Clearer Mind</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         :root {
-            --apple-bg: #f5f5f7; /* That premium Apple off-white */
+            --apple-bg: #f5f5f7; 
             --jet-black: #000000;
-            --apple-text: #1d1d1f; /* Apple's standard deep black text */
+            --apple-text: #1d1d1f; 
             --lunar-green: #4a5d4e; 
-            --input-fill: #ffffff;
+            --text-gray: #86868b;
         }
 
         body {
             margin: 0; padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
             background-color: var(--apple-bg);
             color: var(--apple-text);
             display: flex; flex-direction: column;
@@ -40,41 +39,26 @@
         /* Left Side */
         .content { flex: 1.2; text-align: left; }
         
-        .status-pill {
-            display: inline-block; 
-            border: 1.5px solid var(--jet-black);
-            color: var(--jet-black);
-            padding: 6px 20px; border-radius: 25px;
-            font-size: 0.7rem; text-transform: uppercase; 
-            margin-bottom: 25px;
-            letter-spacing: 1px; font-weight: 700;
-        }
+        h1 { font-size: 4.5rem; margin: 0; font-weight: 700; letter-spacing: -2px; color: var(--jet-black); line-height: 1.1; }
+        .tagline { font-size: 1.6rem; margin: 20px 0 30px; color: var(--apple-text); font-weight: 400; line-height: 1.4; opacity: 0.9; }
 
-        h1 { font-size: 5.5rem; margin: 0; font-weight: 700; letter-spacing: -3px; color: var(--jet-black); }
-        .tagline { font-size: 1.8rem; margin: 10px 0 40px; color: var(--apple-text); font-weight: 400; line-height: 1.2; }
-
-        .email-form { display: flex; flex-direction: column; gap: 15px; max-width: 400px; }
-        input[type="email"] {
-            background: var(--input-fill);
-            border: 1px solid #d2d2d7;
-            padding: 18px; border-radius: 12px;
-            color: var(--jet-black); font-size: 1rem; outline: none;
-        }
+        /* CTA Section */
+        .download-container { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
         
-        .submit-btn {
-            background-color: var(--lunar-green);
-            color: #ffffff; border: none; padding: 18px;
-            border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem;
-            transition: all 0.3s ease;
+        .app-store-btn img {
+            height: 45px; /* Standard App Store Badge height */
+            transition: opacity 0.2s;
         }
-        .submit-btn:hover { opacity: 0.9; transform: scale(1.02); }
+        .app-store-btn:hover img { opacity: 0.8; }
+
+        .supporting-line { font-size: 0.95rem; color: var(--text-gray); font-style: italic; }
 
         /* Right Side: Phone Mockup */
         .phone-mockup { flex: 0.8; display: flex; justify-content: center; }
         .phone-screen {
             width: 285px; height: 580px;
-            background-color: #3e4d41; /* Internal Green */
-            border: 12px solid var(--jet-black); /* JET BLACK BORDER */
+            background-color: #3e4d41; 
+            border: 12px solid var(--jet-black); 
             border-radius: 50px;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
@@ -90,13 +74,14 @@
         }
 
         /* Footer */
-        footer { padding: 40px; text-align: center; font-size: 0.8rem; color: #86868b; }
+        footer { padding: 40px; text-align: center; font-size: 0.8rem; color: var(--text-gray); }
         footer a { color: var(--jet-black); text-decoration: none; margin-left: 15px; font-weight: 500; }
 
         @media (max-width: 900px) {
             .container { flex-direction: column; text-align: center; gap: 50px; }
             .content { display: flex; flex-direction: column; align-items: center; }
-            h1 { font-size: 4.2rem; }
+            h1 { font-size: 3.2rem; }
+            .download-container { align-items: center; }
         }
     </style>
 </head>
@@ -105,15 +90,15 @@
     <div class="main-wrapper">
         <div class="container">
             <div class="content">
-                <div class="status-pill">Coming Soon</div>
-                <h1>Shrava</h1>
-                <p class="tagline">Timeless Indian wisdom for modern clarity</p>
+                <h1>Small daily practices for a clearer mind.</h1>
+                <p class="tagline">Mantras, reflection, and mindful rituals designed for modern life.</p>
                 
-                <form class="email-form" id="earlyAccessForm">
-                    <input type="email" id="emailInput" placeholder="Email" required>
-                    <button type="submit" class="submit-btn">Register for Early Access</button>
-                </form>
-                <p id="msg" style="margin-top:15px; font-size: 0.95rem; font-weight: 600; color: var(--jet-black);"></p>
+                <div class="download-container">
+                    <a href="https://apps.apple.com/gb/app/shrava/id6760371778" class="app-store-btn">
+                        <img src="AppleDownloadLogo.png" alt="Download on the App Store">
+                    </a>
+                    <span class="supporting-line">Just a few minutes a day.</span>
+                </div>
             </div>
 
             <div class="phone-mockup">
@@ -127,37 +112,8 @@
 
     <footer>
         <span>&copy; 2026 Shrava</span>
-        <a href="tos.html">Terms of Service</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="privacy-policy.htm">Privacy Policy</a>
     </footer>
 
-    <script>
-        // Supabase Logic
-         const SUPABASE_URL = 'https://btqjbffhusmmiwfukkrp.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_C4Ns_NBJDaj5RD1Kw2hPdg_ww40vmqu';
-
-           // Initialize Supabase client
-        const { createClient } = supabase;
-        const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-       
-        const form = document.getElementById('earlyAccessForm');
-        const msg = document.getElementById('msg');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('emailInput').value;
-
-            const { error } = await _supabase
-                .from('waitlist') 
-                .insert([{ email: email }]);
-
-            if (error) {
-                msg.innerText = "Please try again shortly.";
-            } else {
-                msg.innerText = "You're on the list! 🙏";
-                form.reset();
-            }
-        });
-    </script>
 </body>
 </html>
