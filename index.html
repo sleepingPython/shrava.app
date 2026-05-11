@@ -12,6 +12,8 @@
             --apple-text: #1d1d1f; 
             --lunar-green: #4a5d4e; 
             --text-gray: #86868b;
+            --phone-inner-green: #3e4d41;
+            --phone-accent-gold: #e2ded0;
         }
 
         body {
@@ -21,13 +23,31 @@
             color: var(--apple-text);
             display: flex; flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* --- TOP LEFT LOGO --- */
+        .nav-header {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            padding: 40px 60px;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--jet-black);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        /* --- MAIN CONTENT AREA --- */
         .main-wrapper {
             flex: 1;
             display: flex; justify-content: center; align-items: center;
-            padding: 40px 20px;
+            padding: 80px 20px;
         }
 
         .container {
@@ -36,129 +56,86 @@
             align-items: center; gap: 80px;
         }
 
-        .nav-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px 50px; /* Spacing from the edges */
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.nav-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--jet-black);
-    text-decoration: none;
-    letter-spacing: -1px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-
-        
-
-        /* Left Side */
+        /* Left Column */
         .content { flex: 1.2; text-align: left; }
-        
         h1 { font-size: 4.5rem; margin: 0; font-weight: 700; letter-spacing: -2px; color: var(--jet-black); line-height: 1.1; }
         .tagline { font-size: 1.6rem; margin: 20px 0 30px; color: var(--apple-text); font-weight: 400; line-height: 1.4; opacity: 0.9; }
 
         /* CTA Section */
         .download-container { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-        
-        .app-store-btn img {
-            height: 45px; /* Standard App Store Badge height */
-            transition: opacity 0.2s;
-        }
-        .app-store-btn:hover img { opacity: 0.8; }
-
+        .app-store-btn img { height: 44px; transition: opacity 0.2s; }
+        .app-store-btn:hover img { opacity: 0.7; }
         .supporting-line { font-size: 0.95rem; color: var(--text-gray); font-style: italic; }
 
-        /* Right Side: Phone Mockup */
-        .phone-mockup { flex: 0.8; display: flex; justify-content: center; }
-        .phone-screen {
-    width: 285px; height: 580px;
-    background-color: #3e4d41; 
-    border: 12px solid var(--jet-black); 
-    border-radius: 50px;
-    display: flex; flex-direction: column;
-    align-items: center; 
-    justify-content: center; /* This keeps the card centered */
-    position: relative; 
-    box-shadow: 0 50px 100px rgba(0,0,0,0.1);
-}
-
-/* --- ADD THE FLIP CARD CSS HERE --- */
-/* Styling for the Wisdom Stack inside the phone */
-.wisdom-container {
-    text-align: center;
-    color: #e2ded0;
-    padding: 0 25px;
-    margin-top: 20px; /* Balances the space between header and button */
-}
-
-.sanskrit {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-}
-
-.divider {
-    width: 40px;
-    height: 1px;
-    background-color: rgba(226, 222, 208, 0.3);
-    margin: 20px auto;
-}
-
-.transliteration {
-    font-size: 0.9rem;
-    opacity: 0.7;
-    font-style: italic;
-    margin-bottom: 10px;
-}
-
-.meaning {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    font-weight: 300;
-    color: #e2ded0;
-    opacity: 0.95;
-}
-
-
-        .phone-btn {
-            position: absolute; bottom: 50px;
-            background-color: #7a765a; 
-            color: #e2ded0; padding: 12px 40px;
-            border-radius: 30px; font-size: 0.85rem; font-weight: 600;
+        /* --- PREMIUM PHONE MOCKUP (RIGHT COLUMN) --- */
+        .premium-phone-container {
+            flex: 1;
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+            animation: breathingBounce 8s ease-in-out infinite; /* MEDITATIVE BOUNCE */
         }
-        /* Footer */
+
+        /* The Frame Image Layer */
+        .phone-frame-overlay {
+            width: 310px;
+            height: auto;
+            z-index: 10;
+            pointer-events: none;
+            position: relative;
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.1));
+        }
+
+        /* The Content Screen (Behind the Frame) */
+        .app-screen-content {
+            position: absolute;
+            top: 2%; left: 7.5%;
+            width: 85%; height: 96%;
+            background-color: var(--phone-inner-green);
+            border-radius: 40px;
+            z-index: 5;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: space-evenly;
+            padding: 60px 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* Inside the Mockup */
+        .mockup-header { color: var(--phone-accent-gold); font-weight: 400; font-size: 2.2rem; margin: 0; }
+        .wisdom-stack { text-align: center; color: var(--phone-accent-gold); }
+        .sanskrit { font-size: 1.2rem; margin-bottom: 8px; font-weight: 500; }
+        .transliteration { font-size: 0.75rem; opacity: 0.7; font-style: italic; }
+        .mockup-divider { width: 30px; height: 1px; background: rgba(226, 222, 208, 0.3); margin: 15px auto; }
+        .meaning { font-size: 0.95rem; line-height: 1.4; font-weight: 300; opacity: 0.9; }
+        .mockup-button { background-color: #7a765a; color: var(--phone-accent-gold); padding: 10px 30px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+
+        /* ANIMATION */
+        @keyframes breathingBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* FOOTER */
         footer { padding: 40px; text-align: center; font-size: 0.8rem; color: var(--text-gray); }
         footer a { color: var(--jet-black); text-decoration: none; margin-left: 15px; font-weight: 500; }
 
+        /* RESPONSIVE */
         @media (max-width: 900px) {
+            .nav-header { padding: 20px; justify-content: center; position: relative; }
             .container { flex-direction: column; text-align: center; gap: 50px; }
             .content { display: flex; flex-direction: column; align-items: center; }
-            h1 { font-size: 3.2rem; }
+            h1 { font-size: 3rem; }
             .download-container { align-items: center; }
-            .nav-header {
-        justify-content: center; /* Centers logo on mobile */
-        padding: 20px;
-    }
+            .premium-phone-container { transform: scale(0.9); margin-top: 20px; }
         }
     </style>
 </head>
 <body>
-<header class="nav-header">
-        <a href="#" class="nav-logo">
-            Shrava
-        </a>
+
+    <header class="nav-header">
+        <a href="#" class="nav-logo">Shrava</a>
     </header>
+
     <div class="main-wrapper">
         <div class="container">
             <div class="content">
@@ -166,43 +143,35 @@
                 <p class="tagline">Mantras, reflection, and mindful rituals designed for modern life.</p>
                 
                 <div class="download-container">
-                    <a href="https://apps.apple.com/gb/app/shrava/id6760371778" class="app-store-btn">
-                        <img src="AppleDownloadLogo.svg" alt="Download on the App Store">
+                    <a href="#" class="app-store-btn">
+                        <img src="app-store-badge.png" alt="Download on the App Store">
                     </a>
                     <span class="supporting-line">Just a few minutes a day.</span>
                 </div>
             </div>
 
-            <div class="phone-mockup">
-               <div class="phone-screen">
-    <h2 style="position: absolute; top: 60px; color: #e2ded0; font-weight: 400; letter-spacing: 1px;">Shrava</h2>
-
-    <div class="wisdom-container">
-        <div class="sanskrit">लोकः समस्ताः सुखिनो भवन्तु</div>
-        
-        <div class="transliteration">Lokah Samastah Sukhino Bhavantu</div>
-        
-        <div class="divider"></div>
-        
-        <div class="meaning">
-            May everyone in the whole world be happy.
+            <div class="premium-phone-container">
+                <img src="premiumPhone.png" alt="Phone Frame" class="phone-frame-overlay">
+                
+                <div class="app-screen-content">
+                    <h2 class="mockup-header">Shrava</h2>
+                    <div class="wisdom-stack">
+                        <div class="sanskrit">लोकः समस्ताः सुखिनो भवन्तु</div>
+                        <div class="transliteration">Lokah Samastah Sukhino Bhavantu</div>
+                        <div class="mockup-divider"></div>
+                        <div class="meaning">May everyone in the whole world be happy.</div>
+                    </div>
+                    <div class="mockup-button">Enlighten me</div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="phone-btn">Enlighten me</div>
-</div>
-        </div>
-    </div>
-        </div>
-        
 
     <footer>
         <span>&copy; 2026 Shrava</span>
-        <a href="tos.html">Terms of Service</a>
+        <a href="tos.html">Privacy Policy</a>
         <a href="privacy-policy.html">Privacy Policy</a>
     </footer>
 
 </body>
 </html>
-
-
