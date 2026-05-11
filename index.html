@@ -68,56 +68,42 @@
 }
 
 /* --- ADD THE FLIP CARD CSS HERE --- */
-.flip-card {
-    background-color: transparent;
-    width: 260px;
-    height: 200px;
-    perspective: 1000px; 
-}
-
-.flip-card-inner {
-    position: relative;
-    width: 100%; height: 100%;
+/* Styling for the Wisdom Stack inside the phone */
+.wisdom-container {
     text-align: center;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-    cursor: pointer;
-}
-
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.flip-front, .flip-back {
-    position: absolute;
-    width: 100%; height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.flip-front { color: #e2ded0; }
-.flip-front .sanskrit { font-size: 1.3rem; margin-bottom: 10px; font-weight: 500; padding: 0 10px; }
-.flip-front .transliteration { font-size: 0.85rem; opacity: 0.7; font-style: italic; }
-
-.flip-back {
     color: #e2ded0;
-    transform: rotateY(180deg);
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 0 25px;
+    margin-top: 20px; /* Balances the space between header and button */
 }
-.flip-back p { font-size: 1.1rem; line-height: 1.5; font-weight: 300; }
-        .phone-screen h2 { font-size: 3.2rem; margin: 0; font-weight: 400; color: #e2ded0; }
-        .phone-btn {
-            position: absolute; bottom: 50px;
-            background-color: #7a765a; 
-            color: #e2ded0; padding: 12px 40px;
-            border-radius: 30px; font-size: 0.85rem; font-weight: 600;
-        }
 
+.sanskrit {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.divider {
+    width: 40px;
+    height: 1px;
+    background-color: rgba(226, 222, 208, 0.3);
+    margin: 20px auto;
+}
+
+.transliteration {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.meaning {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    font-weight: 300;
+    color: #e2ded0;
+    opacity: 0.95;
+}
         /* Footer */
         footer { padding: 40px; text-align: center; font-size: 0.8rem; color: var(--text-gray); }
         footer a { color: var(--jet-black); text-decoration: none; margin-left: 15px; font-weight: 500; }
@@ -244,19 +230,22 @@
 </style>
 
 <div class="phone-screen">
-    <h2 style="position: absolute; top: 60px;">Shrava</h2>
+    <h2 style="position: absolute; top: 60px; color: #e2ded0; font-weight: 400; letter-spacing: 1px;">Shrava</h2>
 
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-front">
-                <div class="sanskrit">लोकः समस्ताः सुखिनो भवन्तु</div>
-                <div class="transliteration">Lokah Samastah Sukhino Bhavantu</div>
-            </div>
-            <div class="flip-back">
-                <p>May everyone in the whole world be happy.</p>
-            </div>
+    <div class="wisdom-container">
+        <div class="sanskrit">लोकः समस्ताः सुखिनो भवन्तु</div>
+        
+        <div class="transliteration">Lokah Samastah Sukhino Bhavantu</div>
+        
+        <div class="divider"></div>
+        
+        <div class="meaning">
+            May everyone in the whole world be happy.
         </div>
     </div>
+
+    <div class="phone-btn">Enlighten me</div>
+</div>
 
     <div class="phone-btn">Enlighten me</div>
 </div>
