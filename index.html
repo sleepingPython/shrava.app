@@ -69,10 +69,10 @@
 
         /* --- PREMIUM PHONE MOCKUP (RIGHT COLUMN) --- */
        /* 1. THE OUTER BOX */
-premium-phone-container {
+.premium-phone-container {
     position: relative;
-    width: 380px;  /* Increased from 300px */
-    height: 780px; /* Increased to accommodate scale */
+    width: 320px;   /* FIXED WIDTH */
+    height: 650px;  /* FIXED HEIGHT */
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -87,27 +87,27 @@ premium-phone-container {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 10; /* Higher number to stay on top */
     pointer-events: none;
 }
-
 /* 3. THE GREEN SCREEN (LOCKED INSIDE) */
 .app-screen-content {
     position: absolute;
-    /* Precise alignment for your specific iPhone frame */
-    top: 12px;    
-    left: 22px;
-    right: 22px;
-    bottom: 12px;
+    /* This creates a 'padding' inside the phone frame */
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
     
     background-color: #3e4d41 !important; 
-    border-radius: 50px;
-    z-index: 5;
+    border-radius: 40px;
+    z-index: 5; /* Lower number to stay behind */
     
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 70px 20px 50px 20px; /* Large top padding to clear the notch */
+    padding: 50px 20px;
     box-sizing: border-box;
     overflow: hidden;
 }
