@@ -74,13 +74,12 @@
     width: 645px;
     height: 645px;
     margin: 0 auto;
-    transform: scale(0.48);          /* shrink visually */
+    transform: scale(0.48);
     transform-origin: center center;
-    margin-top: -170px;              /* compensate for whitespace scale creates */
-    margin-bottom: -170px;
+    margin-top: -175px;
+    margin-bottom: -175px;
     animation: breathingBounce 8s ease-in-out infinite;
 }
-
 /* 2. THE FRAME (TOP LAYER) */
 .phone-frame-overlay {
     width: 100%;
@@ -94,11 +93,11 @@
 /* 3. THE GREEN SCREEN (LOCKED INSIDE) */
 .app-screen-content {
     position: absolute;
-    top: 34px;
-    bottom: 35px;
+    top: 38px;
+    bottom: 38px;
     left: 172px;
     right: 171px;
-    border-radius: 44px;
+    border-radius: 52px;        /* increased to match phone corners */
     background-color: #3e4d41;
     z-index: 5;
     display: flex;
