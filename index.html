@@ -69,14 +69,15 @@
 
         /* --- PREMIUM PHONE MOCKUP (RIGHT COLUMN) --- */
        /* 1. THE OUTER BOX */
-premium-phone-container {
+.premium-phone-container {
     position: relative;
-    width: 645px;   /* must be square to match the square PNG */
+    width: 645px;
     height: 645px;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    transform: scale(0.48);          /* shrink visually */
+    transform-origin: center center;
+    margin-top: -170px;              /* compensate for whitespace scale creates */
+    margin-bottom: -170px;
     animation: breathingBounce 8s ease-in-out infinite;
 }
 
