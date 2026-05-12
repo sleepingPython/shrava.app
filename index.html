@@ -69,10 +69,10 @@
 
         /* --- PREMIUM PHONE MOCKUP (RIGHT COLUMN) --- */
        /* 1. THE OUTER BOX */
-.premium-phone-container {
+premium-phone-container {
     position: relative;
-    width: 300px;   /* FIXED WIDTH */
-    height: 610px;  /* FIXED HEIGHT */
+    width: 645px;   /* must be square to match the square PNG */
+    height: 645px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -93,10 +93,10 @@
 /* 3. THE GREEN SCREEN (LOCKED INSIDE) */
 .app-screen-content {
     position: absolute;
-    top: 32px;
-    bottom: 33px;
-    left: 80px;
-    right: 79px;
+    top: 34px;
+    bottom: 35px;
+    left: 172px;
+    right: 171px;
     border-radius: 44px;
     background-color: #3e4d41;
     z-index: 5;
@@ -172,7 +172,9 @@
             .content { display: flex; flex-direction: column; align-items: center; }
             h1 { font-size: 3rem; }
             .download-container { align-items: center; }
-            .premium-phone-container { transform: scale(0.9); margin-top: 20px; }
+            .premium-phone-container { 
+        transform: scale(0.5); /* scale down the 645px container */
+        margin-top: -160px;    /* compensate for scale gap */
         }
     </style>
 </head>
