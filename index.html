@@ -51,6 +51,7 @@
         }
 
         .container {
+            position: relative;
             display: flex; flex-direction: row;
             width: 100%; max-width: 1100px;
             align-items: center; gap: 80px;
@@ -165,14 +166,28 @@
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .nav-header { padding: 20px; justify-content: center; position: relative; }
-            .container { flex-direction: column; text-align: center; gap: 50px; }
-            .content { display: flex; flex-direction: column; align-items: center; }
+            .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+            .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        order: 1;        /* text + CTA first */
+        z-index: 20;     /* stay above phone */
+        position: relative;
+    }
             h1 { font-size: 3rem; }
             .download-container { align-items: center; }
-            .premium-phone-container { 
-        transform: scale(0.5); /* scale down the 645px container */
-        margin-top: -160px;    /* compensate for scale gap */
-        }
+            .premium-phone-container {
+        order: 2;        /* phone below CTA */
+        transform: scale(0.38);
+        transform-origin: top center;
+        margin-top: -200px;   /* pull up the whitespace from scale */
+        margin-bottom: -220px;
+    }
     </style>
 </head>
 <body>
