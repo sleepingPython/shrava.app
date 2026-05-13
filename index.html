@@ -4,177 +4,424 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shrava | Daily Practices for a Clearer Mind</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --apple-bg: #f5f5f7; 
-            --jet-black: #000000;
-            --apple-text: #1d1d1f; 
-            --lunar-green: #4a5d4e; 
-            --text-gray: #86868b;
-            --phone-inner-green: #3e4d41;
-            --phone-accent-gold: #e2ded0;
+            --bg: #f0ede8;
+            --dark: #1a1a18;
+            --green-deep: #2e3d31;
+            --green-mid: #3e4d41;
+            --green-light: #4a5d4e;
+            --gold: #c8b97a;
+            --gold-light: #e2ded0;
+            --text-muted: #7a7a72;
+            --phone-frame: #2a2028;
+            --phone-rim: #3d3540;
+            --phone-shine: rgba(255,255,255,0.08);
         }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            margin: 0; padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-            background-color: var(--apple-bg);
-            color: var(--apple-text);
-            display: flex; flex-direction: column;
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--dark);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- TOP LEFT LOGO --- */
+        /* Subtle grain texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* NAV */
         .nav-header {
             position: absolute;
             top: 0; left: 0; width: 100%;
-            padding: 40px 60px;
-            box-sizing: border-box;
+            padding: 36px 60px;
             z-index: 100;
-        }
-        .nav-logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--jet-black);
-            text-decoration: none;
-            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* --- MAIN CONTENT AREA --- */
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        /* MAIN */
         .main-wrapper {
             flex: 1;
-            display: flex; justify-content: center; align-items: center;
-            padding: 80px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 60px 80px;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
-            display: flex; flex-direction: row;
-            width: 100%; max-width: 1100px;
-            align-items: center; gap: 80px;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 1100px;
+            align-items: center;
+            gap: 80px;
         }
 
-        /* Left Column */
-        .content { flex: 1.2; text-align: left; }
-        h1 { font-size: 4.5rem; margin: 0; font-weight: 700; letter-spacing: -2px; color: var(--jet-black); line-height: 1.1; }
-        .tagline { font-size: 1.6rem; margin: 20px 0 30px; color: var(--apple-text); font-weight: 400; line-height: 1.4; opacity: 0.9; }
+        /* LEFT CONTENT */
+        .content {
+            flex: 1.2;
+        }
 
-        /* CTA Section */
-        .download-container { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-        .app-store-btn img { height: 44px; transition: opacity 0.2s; }
-        .app-store-btn:hover img { opacity: 0.7; }
-        .supporting-line { font-size: 0.95rem; color: var(--text-gray); font-style: italic; }
+        .eyebrow {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-        /* --- PREMIUM PHONE MOCKUP (RIGHT COLUMN) --- */
-       /* 1. THE OUTER BOX */
-.premium-phone-container {
-    position: relative;
-    width: 645px;
-    height: 645px;
-    margin: 0 auto;
-    transform: scale(0.48);
-    transform-origin: center center;
-    margin-top: -175px;
-    margin-bottom: -175px;
-    animation: breathingBounce 8s ease-in-out infinite;
-}
-/* 2. THE FRAME (TOP LAYER) */
-.phone-frame-overlay {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10; /* Higher number to stay on top */
-    pointer-events: none;
-}
-/* 3. THE GREEN SCREEN (LOCKED INSIDE) */
-.app-screen-content {
-    position: absolute;
-    top: 33px;
-    bottom: 33px;
-    left: 176px;
-    right: 173px;
-    border-radius: 52px;        /* increased to match phone corners */
-    background-color: #3e4d41;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 50px 20px;
-    box-sizing: border-box;
-    overflow: hidden;
-}
+        .eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 1px;
+            background: var(--gold);
+        }
 
-.mockup-header { 
-    color: #e2ded0; 
-    font-size: 1.8rem; 
-    margin: 0; 
-}
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            line-height: 1.05;
+            color: var(--dark);
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
 
-.wisdom-stack { 
-    text-align: center; 
-    color: #e2ded0; 
-    width: 100%;
-}
+        h1 em {
+            font-style: italic;
+            color: var(--green-light);
+        }
 
-.sanskrit { 
-    font-size: 0.95rem; 
-    margin-bottom: 5px; 
-    line-height: 1.3;
-}
+        .tagline {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            font-weight: 300;
+            max-width: 420px;
+            margin-bottom: 40px;
+        }
 
-.transliteration { 
-    font-size: 0.65rem; 
-    opacity: 0.7; 
-    font-style: italic; 
-}
+        /* CTA */
+        .download-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 14px;
+        }
 
-.mockup-divider { 
-    width: 20px; 
-    height: 1px; 
-    background: rgba(226, 222, 208, 0.3); 
-    margin: 12px auto; 
-}
+        .app-store-btn img {
+            height: 48px;
+            transition: opacity 0.2s, transform 0.2s;
+        }
 
-.meaning { 
-    font-size: 0.85rem; 
-    line-height: 1.4; 
-    padding: 0 5px;
-}
+        .app-store-btn:hover img {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
 
-.mockup-button { 
-    background-color: #7a765a; 
-    color: #e2ded0; 
-    padding: 8px 25px; 
-    border-radius: 20px; 
-    font-size: 0.7rem; 
-    font-weight: 600; 
-}
-        
-        /* ANIMATION */
-        @keyframes breathingBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        .supporting-line {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        /* =====================
+           CSS PHONE MOCKUP
+        ===================== */
+        .phone-wrap {
+            flex-shrink: 0;
+            animation: floatPhone 7s ease-in-out infinite;
+        }
+
+        @keyframes floatPhone {
+            0%, 100% { transform: translateY(0px) rotate(-1deg); }
+            50% { transform: translateY(-18px) rotate(1deg); }
+        }
+
+        /* Outer shell — thin premium frame like a real iPhone */
+        .css-phone {
+            position: relative;
+            width: 262px;
+            height: 536px;
+            /* Titanium/purple aluminium finish */
+            background: linear-gradient(145deg,
+                #b8afc0 0%,
+                #9d94a8 20%,
+                #7a7080 50%,
+                #9890a4 80%,
+                #c2bace 100%
+            );
+            border-radius: 46px;
+            box-shadow:
+                /* ultra-thin outer rim */
+                0 0 0 0.5px rgba(255,255,255,0.25),
+                /* depth */
+                0 35px 70px rgba(20, 15, 30, 0.5),
+                0 8px 24px rgba(0,0,0,0.2),
+                /* top edge catch-light */
+                inset 0 1px 0 rgba(255,255,255,0.35),
+                inset 0 -1px 0 rgba(0,0,0,0.2);
+            /* The frame itself is just 3px — the screen fills the rest */
+            padding: 3px 3px 2px;
+        }
+
+        /* Power button (right side) */
+        .css-phone::before {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: 120px;
+            width: 2px;
+            height: 58px;
+            background: linear-gradient(180deg, #9d94a8, #b8afc0, #9d94a8);
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* Volume buttons (left side) */
+        .css-phone::after {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 100px;
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(180deg, #9d94a8, #b8afc0, #9d94a8);
+            border-radius: 2px 0 0 2px;
+            /* second volume button via shadow */
+            box-shadow: 0 44px 0 2px #b8afc0, 0 44px 0 2px #9d94a8;
+        }
+
+        /* Screen sits directly inside — almost no bezel */
+        .screen-bezel {
+            width: 100%;
+            height: 100%;
+            background: #080808;
+            border-radius: 44px;
+            padding: 0px 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hairline top reflection on bezel */
+        .screen-bezel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 10%;
+            width: 80%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+        }
+
+        /* The actual screen — fills almost all space */
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: var(--green-mid);
+            border-radius: 42px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 38px 22px 32px;
+        }
+
+        /* Screen shine */
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 45%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 10;
+            border-radius: 38px 38px 0 0;
+        }
+
+        /* Dynamic island */
+        .dynamic-island {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 20px;
+            background: #0d0d0d;
+            border-radius: 20px;
+            z-index: 20;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        /* Screen content */
+        .screen-app-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        .screen-wisdom {
+            text-align: center;
+            color: var(--gold-light);
+            z-index: 1;
+            width: 100%;
+        }
+
+        .screen-sanskrit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .screen-transliteration {
+            font-size: 0.62rem;
+            opacity: 0.6;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+        }
+
+        .screen-divider {
+            width: 24px;
+            height: 1px;
+            background: rgba(226, 222, 208, 0.25);
+            margin: 14px auto;
+        }
+
+        .screen-meaning {
+            font-size: 0.82rem;
+            line-height: 1.6;
+            font-weight: 300;
+            opacity: 0.88;
+        }
+
+        .screen-btn {
+            background: rgba(122, 118, 90, 0.75);
+            color: var(--gold-light);
+            padding: 10px 28px;
+            border-radius: 22px;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            z-index: 1;
+            border: 1px solid rgba(200, 185, 122, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Subtle green ambient glow behind phone */
+        .phone-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(74, 93, 78, 0.18) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* FOOTER */
-        footer { padding: 40px; text-align: center; font-size: 0.8rem; color: var(--text-gray); }
-        footer a { color: var(--jet-black); text-decoration: none; margin-left: 15px; font-weight: 500; }
+        footer {
+            padding: 32px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        footer a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        footer a:hover { opacity: 0.6; }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
-            .nav-header { padding: 20px; justify-content: center; position: relative; }
-            .container { flex-direction: column; text-align: center; gap: 50px; }
-            .content { display: flex; flex-direction: column; align-items: center; }
-            h1 { font-size: 3rem; }
+            .nav-header { padding: 24px 24px; position: relative; }
+
+            .main-wrapper { padding: 40px 24px 60px; }
+
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 50px;
+                text-align: center;
+            }
+
+            .content { order: 1; display: flex; flex-direction: column; align-items: center; }
+
+            .eyebrow { justify-content: center; }
+
+            h1 { font-size: 3.2rem; }
+
+            .tagline { max-width: 100%; }
+
             .download-container { align-items: center; }
-            .premium-phone-container { 
-        transform: scale(0.5); /* scale down the 645px container */
-        margin-top: -160px;    /* compensate for scale gap */
+
+            .phone-wrap { order: 2; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.6rem; }
+
+            .css-phone {
+                width: 220px;
+                height: 450px;
+                border-radius: 40px;
+            }
+
+            .screen-bezel { border-radius: 38px; }
+            .screen { border-radius: 37px; padding: 44px 18px 30px; }
+            .dynamic-island { width: 80px; height: 26px; }
         }
     </style>
 </head>
@@ -186,38 +433,50 @@
 
     <div class="main-wrapper">
         <div class="container">
+
+            <!-- LEFT: Text + CTA -->
             <div class="content">
-                <h1>Timeless practices for a steady mind.</h1>
-                <p class="tagline">Short daily reflections, mantras, and practices to help you stay calm, focused, and grounded in modern life.</p>
-                
+                <div class="eyebrow">Daily Practice</div>
+                <h1>Timeless practices for a <em>steady mind.</em></h1>
+                <p class="tagline">Short daily reflections, mantras, and rituals to help you stay calm, focused, and grounded in modern life.</p>
+
                 <div class="download-container">
                     <a href="https://apps.apple.com/gb/app/shrava/id6760371778" class="app-store-btn">
                         <img src="AppleDownloadLogo.svg" alt="Download on the App Store">
                     </a>
-                    <span class="supporting-line">Free to start • 2-minute daily practice</span>
+                    <span class="supporting-line">Free to start &bull; 2-minute daily practice</span>
                 </div>
             </div>
 
-            <div class="premium-phone-container">
-                <img src="premiumPhone.png" alt="Phone Frame" class="phone-frame-overlay">
-                
-                <div class="app-screen-content">
-                    <h2 class="mockup-header">Shrava</h2>
-                    <div class="wisdom-stack">
-                        <div class="sanskrit">लोकः समस्ताः सुखिनो भवन्तु</div>
-                        <div class="transliteration">Lokah Samastah Sukhino Bhavantu</div>
-                        <div class="mockup-divider"></div>
-                        <div class="meaning">May everyone in the whole world be happy.</div>
+            <!-- RIGHT: CSS Phone -->
+            <div class="phone-wrap">
+                <div class="phone-glow"></div>
+                <div class="css-phone">
+                    <div class="screen-bezel">
+                        <div class="screen">
+                            <div class="dynamic-island"></div>
+
+                            <div class="screen-app-name">Shrava</div>
+
+                            <div class="screen-wisdom">
+                                <div class="screen-sanskrit">लोकः समस्ताः सुखिनो भवन्तु</div>
+                                <div class="screen-transliteration">Lokah Samastah Sukhino Bhavantu</div>
+                                <div class="screen-divider"></div>
+                                <div class="screen-meaning">May everyone in the whole world be happy.</div>
+                            </div>
+
+                            <div class="screen-btn">Enlighten me</div>
+                        </div>
                     </div>
-                    <div class="mockup-button">Enlighten me</div>
                 </div>
             </div>
+
         </div>
     </div>
 
     <footer>
         <span>&copy; 2026 Shrava</span>
-        <a href="tos.html">Privacy Policy</a>
+        <a href="tos.html">Terms of Service</a>
         <a href="privacy-policy.html">Privacy Policy</a>
     </footer>
 
