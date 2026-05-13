@@ -68,10 +68,11 @@
         .app-store-btn:hover img { opacity: 0.7; }
         .supporting-line { font-size: 0.95rem; color: var(--text-gray); font-style: italic; }
 
-        /* --- PHONE MOCKUP --- */
-        /* Container is the full PNG size (645x645 square).
-           Both the frame image and the green screen are positioned
-           relative to this same box, so they always stay aligned. */
+        /* --- PHONE MOCKUP ---
+           The PNG is 645x645 square. The actual visible phone sits in the
+           centre of that square. We make the container match the PNG exactly,
+           then scale the whole thing down so it fits the layout.
+        */
         .premium-phone-container {
             position: relative;
             width: 645px;
@@ -79,22 +80,21 @@
             flex-shrink: 0;
             transform: scale(0.48);
             transform-origin: center center;
-            margin: -170px auto;   /* compensate for whitespace from scale */
+            /* negative margins pull surrounding content back in after scale */
+            margin-top: -170px;
+            margin-bottom: -170px;
             animation: breathingBounce 8s ease-in-out infinite;
         }
 
         .phone-frame-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 10;
             pointer-events: none;
         }
 
-        /* Screen insets measured from the 645x645 image:
-           top: 34px, bottom: 35px, left: 172px, right: 171px */
+        /* Pixel-perfect insets measured from the 645x645 PNG */
         .app-screen-content {
             position: absolute;
             top: 34px;
@@ -115,7 +115,7 @@
 
         .mockup-header { 
             color: #e2ded0; 
-            font-size: 1.8rem; 
+            font-size: 1.8rem;
             font-weight: 600;
             margin: 0; 
         }
@@ -162,8 +162,8 @@
         
         /* ANIMATION */
         @keyframes breathingBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            0%, 100% { transform: scale(0.48) translateY(0); }
+            50% { transform: scale(0.48) translateY(-15px); }
         }
 
         /* FOOTER */
@@ -173,14 +173,14 @@
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .nav-header { 
-                padding: 20px; 
+                padding: 20px;
                 position: relative; 
             }
 
             .container { 
                 flex-direction: column; 
                 text-align: center; 
-                gap: 0; 
+                gap: 30px;
             }
 
             .content { 
@@ -188,6 +188,8 @@
                 flex-direction: column; 
                 align-items: center; 
                 order: 1;
+                position: relative;
+                z-index: 20;
             }
 
             h1 { font-size: 3rem; }
@@ -196,10 +198,15 @@
 
             .premium-phone-container { 
                 order: 2;
-                transform: scale(0.55);
+                transform: scale(0.48);
                 transform-origin: top center;
-                margin-top: -145px;
-                margin-bottom: -200px;
+                margin-top: -170px;
+                margin-bottom: -210px;
+            }
+
+            @keyframes breathingBounce {
+                0%, 100% { transform: scale(0.48) translateY(0); }
+                50% { transform: scale(0.48) translateY(-15px); }
             }
         }
 
@@ -208,12 +215,18 @@
             .tagline { font-size: 1.2rem; }
 
             .premium-phone-container { 
-                transform: scale(0.42);
+                transform: scale(0.36);
                 transform-origin: top center;
-                margin-top: -185px;
-                margin-bottom: -245px;
+                margin-top: -205px;
+                margin-bottom: -265px;
+            }
+
+            @keyframes breathingBounce {
+                0%, 100% { transform: scale(0.36) translateY(0); }
+                50% { transform: scale(0.36) translateY(-15px); }
             }
         }
+
     </style>
 </head>
 <body>
